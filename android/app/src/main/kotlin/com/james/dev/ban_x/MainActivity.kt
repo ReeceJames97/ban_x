@@ -1,0 +1,5 @@
+package com.james.dev.ban_x
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity()
