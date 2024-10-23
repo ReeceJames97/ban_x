@@ -13,8 +13,7 @@ MaterialButton customStandardBtn(String text,
                   ? buttonColor ?? BanXColors.primaryBtnColor
                   : Colors.grey)),
       minWidth: double.infinity,
-      // height: BanXSizes.buttonHeight,
-      height: 38,
+      height: BanXSizes.buttonHeight,
       color: buttonColor ?? BanXColors.primaryBtnColor,
       disabledColor: BanXColors.disabledBtnColor,
       onPressed: isEnable

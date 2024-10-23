@@ -10,7 +10,7 @@ AppBar getAppbar(String title,{List<Widget>? actionWidget}){
   if( !kIsWeb && Platform.isAndroid){
     return AppBar(
       elevation: 5,
-      title: Text(title),
+      title: Text(title, style: const TextStyle(color: Colors.white),),
       centerTitle: true,
       iconTheme: const IconThemeData(color: Colors.white),
       systemOverlayStyle: getStatusBarStyle(),
@@ -20,7 +20,7 @@ AppBar getAppbar(String title,{List<Widget>? actionWidget}){
   }else{
     return AppBar(
       elevation: 5,
-      title: Text(title),
+      title: Text(title, style: const TextStyle(color: Colors.white),),
       centerTitle: true,
       iconTheme: const IconThemeData(color: Colors.white),
       systemOverlayStyle: getStatusBarStyle(),
