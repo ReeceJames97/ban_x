@@ -8,8 +8,10 @@ import 'package:ban_x/utils/helpers/appbar_utils.dart';
 import 'package:ban_x/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ban_x/utils/constants/banx_image_strings.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ban_x/utils/constants/banx_image_strings.dart';
+import 'package:lottie/lottie.dart';
+// import 'package:lottie/lottie.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -22,60 +24,69 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
         appBar: getAppbar(BanXString.appName),
         body: SingleChildScrollView(
-      child: Padding(
-        padding: BanXSpacingStyle.paddingWithAppBarHeight,
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+          child: Padding(
+            padding: BanXSpacingStyle.paddingWithAppBarHeight,
+            child: Column(
               children: [
-                /// App logo
-                Image(
-                    height: 150,
-                    image: AssetImage(isDark
-                        ? BanXImageStrings.lightAppLogo
-                        : BanXImageStrings.darkAppLogo)),
-                const SizedBox(height: BanXSizes.sm),
-                Text(BanXString.loginTitle,
-                    style: Theme.of(context).textTheme.headlineMedium),
-                const SizedBox(height: BanXSizes.sm),
-                Text(BanXString.loginSubTitle,
-                    style: Theme.of(context).textTheme.bodyMedium),
-
-                /// Login Form
-                Form(
-                    child: Column(children: [
-                  ///Email
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Iconsax.direct_right),
-                      labelText: BanXString.email,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    /// App logo
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Lottie.asset('assets/lotties/hello.json',
+                          width: 220,
+                          height: 220,
+                          animate: true,
+                          repeat: true,
+                          fit: BoxFit.fill),
                     ),
-                  ),
 
-                  const SizedBox(height: BanXSizes.spaceBtwInputFields),
+                    // Image(
+                    //     height: 150,
+                    //     image: AssetImage(isDark
+                    //         ? BanXImageStrings.lightAppLogo
+                    //         : BanXImageStrings.darkAppLogo)),
+                    const SizedBox(height: BanXSizes.sm),
+                    Text(BanXString.loginTitle,
+                        style: Theme.of(context).textTheme.headlineMedium),
+                    const SizedBox(height: BanXSizes.sm),
+                    Text(BanXString.loginSubTitle,
+                        style: Theme.of(context).textTheme.bodyMedium),
 
-                  ///Password
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Iconsax.password_check),
-                      labelText: BanXString.password,
-                      suffixIcon: Icon(Iconsax.eye_slash),
-                    ),
-                  ),
+                    const SizedBox(height: BanXSizes.spaceBtwSections),
+
+                    /// Login Form
+                    Form(
+                        child: Column(children: [
+                      ///Email
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Iconsax.direct_right),
+                          labelText: BanXString.email,
+                        ),
+                      ),
+
+                      const SizedBox(height: BanXSizes.spaceBtwInputFields),
+
+                      ///Password
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Iconsax.password_check),
+                          labelText: BanXString.password,
+                          suffixIcon: Icon(Iconsax.eye_slash),
+                        ),
+                      ),
 
                       const SizedBox(height: BanXSizes.spaceBtwInputFields / 2),
 
                       ///Remember me and forgot password
                       Row(
                         children: [
-
                           ///Remember me
                           Row(
                             children: [
-                              Checkbox(value: true, onChanged: (value){
-
-                              }),
+                              Checkbox(value: true, onChanged: (value) {}),
                               const Text(BanXString.rememberMe),
                             ],
                           ),
@@ -83,11 +94,13 @@ class SignInScreen extends StatelessWidget {
                           const Spacer(),
 
                           ///Forgot password
-                          TextButton(onPressed: () {}, child: const Text(BanXString.forgotPassword))
+                          TextButton(
+                              onPressed: () {},
+                              child: const Text(BanXString.forgotPassword))
                         ],
                       ),
 
-                      const SizedBox(height: BanXSizes.spaceBtwSections),
+                      const SizedBox(height: BanXSizes.spaceBtwItems),
 
                       ///Sign In Button
                       customStandardBtn(BanXString.signIn,
@@ -98,32 +111,41 @@ class SignInScreen extends StatelessWidget {
                       ///Sign Up Button
                       customStandardBtn(BanXString.signUp,
                           callBack: controller.onTapSignUp),
+                    ])),
 
-                ])),
+                    const SizedBox(height: BanXSizes.spaceBtwSections),
 
-                ///Divider
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      child: Divider(
-                        color: isDark ? BanXColors.darkGrey : BanXColors.grey,
-                        thickness: 0.5, indent: 60, endIndent: 5,),
-                    ),
-                    Text(BanXString.orSignInWith, style: Theme.of(context).textTheme.labelMedium),
-
-                    Flexible(
-                      child: Divider(
-                        color: isDark ? BanXColors.darkGrey : BanXColors.grey,
-                        thickness: 0.5, indent: 5, endIndent: 60,),
-                    ),
+                    ///Divider
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Divider(
+                            color:
+                                isDark ? BanXColors.darkGrey : BanXColors.grey,
+                            thickness: 0.5,
+                            indent: 60,
+                            endIndent: 5,
+                          ),
+                        ),
+                        Text(BanXString.orSignInWith,
+                            style: Theme.of(context).textTheme.labelMedium),
+                        Flexible(
+                          child: Divider(
+                            color:
+                                isDark ? BanXColors.darkGrey : BanXColors.grey,
+                            thickness: 0.5,
+                            indent: 5,
+                            endIndent: 60,
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 )
               ],
-            )
-          ],
-        ),
-      ),
-    ));
+            ),
+          ),
+        ));
   }
 }

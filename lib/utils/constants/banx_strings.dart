@@ -7,8 +7,8 @@ class BanXString {
   static const String welcome = "Welcome";
   static const String ok = "OK";
   static const String cancel = "Cancel";
-  static const String loginTitle = "Login to your account";
-  static const String loginSubTitle = "Welcome";
+  static const String loginTitle = "Welcome";
+  static const String loginSubTitle = "Login to your account";
   static const String signUpTitle = "Sign up to your account";
   static const String forgotPassword = "Forgot Password?";
   static const String email = "Email";
