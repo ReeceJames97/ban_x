@@ -1,12 +1,13 @@
 import 'dart:io';
+
 import 'package:ban_x/utils/constants/banx_colors.dart';
 import 'package:ban_x/utils/constants/banx_sizes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-AppBar getAppbar(String title,{List<Widget>? actionWidget}){
-
+AppBar getAppbar(String title,
+    {Color? backgroundColor, List<Widget>? actionWidget}) {
   if( !kIsWeb && Platform.isAndroid){
     return AppBar(
       elevation: 5,
@@ -15,7 +16,7 @@ AppBar getAppbar(String title,{List<Widget>? actionWidget}){
       iconTheme: const IconThemeData(color: Colors.white),
       systemOverlayStyle: getStatusBarStyle(),
       actions: actionWidget,
-      backgroundColor: BanXColors.primaryColor,
+      backgroundColor: backgroundColor ?? BanXColors.primaryColor,
     );
   }else{
     return AppBar(
@@ -26,7 +27,7 @@ AppBar getAppbar(String title,{List<Widget>? actionWidget}){
       systemOverlayStyle: getStatusBarStyle(),
       actions: actionWidget,
       toolbarHeight: BanXSizes.appBarHeight,
-      backgroundColor: BanXColors.primaryColor,
+      backgroundColor: backgroundColor ?? BanXColors.primaryColor,
     );
   }
 
