@@ -9,12 +9,11 @@ import 'package:ban_x/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:ban_x/utils/constants/banx_image_strings.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:lottie/lottie.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
