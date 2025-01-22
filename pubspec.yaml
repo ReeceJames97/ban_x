@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.2
+  sdk: ">=2.12.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -49,12 +49,19 @@ dependencies:
   http: ^1.2.2
   intl: ^0.19.0
   logger: ^2.4.0
-  url_launcher: ^6.3.1
+  url_launcher: ^6.1.10
+
+  #Api Call
+  dio: ^4.0.6
+  retrofit: ^3.3.1
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.4.13
+  build_runner: ^2.4.9
+  retrofit_generator: ^4.2.0
+  json_serializable: ^6.3.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
