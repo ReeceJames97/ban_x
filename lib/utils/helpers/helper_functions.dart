@@ -45,7 +45,8 @@ class HelperFunctions {
   }
 
   static void navigateToScreen(Widget screen){
-    Get.to(() => screen);
+    Get.to(() => screen,
+        transition: Transition.rightToLeft, curve: Curves.easeInOut);
   }
 
   static bool isDarkMode(BuildContext context) {

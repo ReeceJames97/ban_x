@@ -7,7 +7,7 @@ MaterialButton customStandardBtn(String text,
   return MaterialButton(
       elevation: 4,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(10.0),
           side: BorderSide(
               color: isEnable
                   ? buttonColor ?? BanXColors.primaryBtnColor
@@ -26,8 +26,9 @@ MaterialButton customStandardBtn(String text,
       child: Center(
         child: Text(text,
             style: TextStyle(
-              fontSize: BanXSizes.fontSizeLg,
-                color: isEnable ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: BanXSizes.fontSizeMd,
+              color: isEnable ? Colors.white : Colors.black,
             )),
       ));
 }

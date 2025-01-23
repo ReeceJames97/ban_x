@@ -15,6 +15,9 @@ class BanXString {
   static const String password = "Password";
   static const String rememberMe = "Remember Me?";
   static const String orSignInWith = "Or Sign In with";
-
-
+  static const String orSignUpWith = "Or Sign Up with";
+  static const String userName = "User Name";
+  static const String agreeTo = "I agree to";
+  static const String privacyPolicy = "Privacy Policy";
+  static const String termsOfUse = "Terms of use";
 }

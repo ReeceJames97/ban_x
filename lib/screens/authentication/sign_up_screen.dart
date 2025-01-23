@@ -1,6 +1,6 @@
 import 'package:ban_x/common/widgets/custom_standard_button.dart';
 import 'package:ban_x/common/widgets/keyboard_dimiss_view.dart';
-import 'package:ban_x/controllers/authentication/sign_in_controller.dart';
+import 'package:ban_x/controllers/authentication/sign_up_controller.dart';
 import 'package:ban_x/utils/constants/banx_colors.dart';
 import 'package:ban_x/utils/constants/banx_sizes.dart';
 import 'package:ban_x/utils/constants/banx_strings.dart';
@@ -11,31 +11,26 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignInController());
+    final controller = Get.put(SignUpController());
     final isDark = HelperFunctions.isDarkMode(context);
 
     return Scaffold(
         appBar: getAppbar(BanXString.appName),
         key: controller.scaffoldKey,
         resizeToAvoidBottomInset: true,
-        body: GetBuilder<SignInController>(
+        body: GetBuilder<SignUpController>(
             init: controller,
             builder: (_) => keyboardDismissView(
-                  child: buildBodyWidget(controller, isDark),
-                )));
+                child: buildBodyWidget(controller, context, isDark))));
   }
 
-  Widget buildBodyWidget(SignInController controller, bool isDark) {
+  Widget buildBodyWidget(
+      SignUpController controller, BuildContext context, bool isDark) {
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.fromLTRB(
@@ -58,7 +53,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Text(BanXString.loginTitle,
                 style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: BanXSizes.sm),
-            Text(BanXString.loginSubTitle,
+            Text(BanXString.signUpTitle,
                 style: Theme.of(context).textTheme.bodyMedium),
 
             const SizedBox(height: BanXSizes.spaceBtwItems),
@@ -66,16 +61,25 @@ class _SignInScreenState extends State<SignInScreen> {
             /// Login Form
             Form(
                 child: Column(children: [
+              ///User Name
+              TextFormField(
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Iconsax.user_edit),
+                  labelText: BanXString.userName,
+                ),
+              ),
+
+              const SizedBox(height: BanXSizes.spaceBtwInputFields),
+
               ///Email
               TextFormField(
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Iconsax.direct),
+                  prefixIcon: Icon(Iconsax.direct_right),
                   labelText: BanXString.email,
                 ),
               ),
 
-              const SizedBox(height: BanXSizes
-                      .spaceBtwInputFields),
+              const SizedBox(height: BanXSizes.spaceBtwInputFields),
 
               ///Password
               Obx(
@@ -99,52 +103,54 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
 
-              const SizedBox(
-                      height: BanXSizes.spaceBtwInputFields / 2),
+              const SizedBox(height: BanXSizes.spaceBtwItems),
 
-              ///Remember me checkbox
-              Obx(() => ListTileTheme(
-                  contentPadding: EdgeInsets.zero,
-                  horizontalTitleGap: 0.0,
-                  child: CheckboxListTile(
-                    visualDensity:
-                        const VisualDensity(horizontal: -1.0, vertical: -4.0),
-                    title: const Text(
-                      BanXString.rememberMe,
-                      // style: TextStyle(
-                      //     fontSize: ScreenUtil().setSp(28),
-                      //     color: AppColors.standardBtnColor,
-                      //     fontWeight: FontWeight.bold),
-                    ),
-                    value: controller.isRememberMe.value,
-                    onChanged: (newValue) {
-                      controller.updateRememberMe(newValue ?? false);
-                    },
-                    controlAffinity: ListTileControlAffinity
-                        .leading, //  <-- leading Checkbox
-                  ))),
-
-              const SizedBox(height: BanXSizes.sm),
-
+              ///Terms & Conditions checkbox
               Row(
                 children: [
-                  ///Sign In Button
-                  Expanded(
-                      flex: 1,
-                      child: customStandardBtn(BanXString.signIn,
-                          callBack: controller.onTapSignIn)),
-
-                  const SizedBox(width: BanXSizes.sm),
-
-                    ///Sign Up Button
-                  Expanded(
-                    flex: 1,
-                    child: customStandardBtn(BanXString.signUp,
-                        buttonColor: BanXColors.secondaryBtnColor,
-                        callBack: controller.onTapSignUp),
-                  )
+                  SizedBox(
+                      width: BanXSizes.lg,
+                      height: BanXSizes.lg,
+                      child: Checkbox(
+                          value: controller.isAgreeToTerms.value,
+                          onChanged: (value) {
+                            controller.updateAgreeToTerms(value ?? false);
+                          })),
+                  const SizedBox(width: BanXSizes.spaceBtwItems),
+                  Text.rich(TextSpan(children: [
+                    TextSpan(
+                        text: "${BanXString.agreeTo} ",
+                        style: Theme.of(context).textTheme.bodySmall),
+                    TextSpan(
+                        text: "${BanXString.privacyPolicy} ",
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                            color:
+                                isDark ? Colors.white : BanXColors.primaryColor,
+                            decoration: TextDecoration.underline,
+                            decorationColor: isDark
+                                ? Colors.white
+                                : BanXColors.primaryColor)),
+                    TextSpan(
+                        text: "and ",
+                        style: Theme.of(context).textTheme.bodySmall),
+                    TextSpan(
+                        text: BanXString.termsOfUse,
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                            color:
+                                isDark ? Colors.white : BanXColors.primaryColor,
+                            decoration: TextDecoration.underline,
+                            decorationColor: isDark
+                                ? Colors.white
+                                : BanXColors.primaryColor))
+                  ]))
                 ],
               ),
+
+              const SizedBox(height: BanXSizes.spaceBtwItems),
+
+              ///Sign Up Button
+              customStandardBtn(BanXString.signUp,
+                  callBack: controller.onTapSignUp),
             ])),
 
             const SizedBox(height: BanXSizes.spaceBtwItems),
@@ -162,7 +168,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 const SizedBox(height: BanXSizes.xs),
-                Text(BanXString.orSignInWith,
+                Text(BanXString.orSignUpWith,
                     style: Theme.of(context).textTheme.labelMedium),
                 const SizedBox(height: BanXSizes.xs),
                 Flexible(

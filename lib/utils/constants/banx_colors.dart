@@ -5,7 +5,7 @@ class BanXColors {
   BanXColors._();
   
   /// App Basic Colors
-  static const Color primaryColor = Color(0xFF4b68ff);
+  static const Color primaryColor = Color(0xFF2563EB);
   static const Color secondaryColor = Color(0xFFffe24b);
   static const Color accentColor = Color(0xFFb0c7ff);
 
@@ -25,15 +25,16 @@ class BanXColors {
 
   /// Background Colors
   static const Color lightBackground = Color(0xFFf6f6f6);
-  static const Color darkBackground = Color(0xFF272727);
+  static const Color darkBackground = Color(0xFF0F101B);
   static const Color primaryBackground = Color(0xFFf3f5ff);
 
   /// Background Container Colors
   static const Color lightContainer = Color(0xFFf6f6f6);
-  static Color darkContainer = BanXColors.white.withOpacity(0.1);
+  static Color darkContainer = BanXColors.white.withValues(alpha: 0.1);
 
   /// Button Colors
-  static const Color primaryBtnColor = Color(0xFF4b68ff);
+  // static const Color primaryBtnColor = Color(0xFF4b68ff);
+  static const Color primaryBtnColor = Color(0xFF2563EB);
   static const Color secondaryBtnColor = Color(0xFF6c757d);
   static const Color disabledBtnColor = Color(0xFFc4c4c4);
 

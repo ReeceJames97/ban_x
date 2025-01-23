@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-Widget keyboardDismissView(
-    {required Widget child, required BuildContext context}) {
+Widget keyboardDismissView({required Widget child}) {
   return GestureDetector(
     behavior: HitTestBehavior.opaque,
-    onTap: () => FocusScope.of(context).unfocus(),
+    onTap: () => Get.focusScope?.unfocus(),
     child: child,
   );
 }

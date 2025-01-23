@@ -1,3 +1,4 @@
+import 'package:ban_x/utils/constants/banx_colors.dart';
 import 'package:ban_x/utils/themes/custom_themes/banx_app_bar_theme.dart';
 import 'package:ban_x/utils/themes/custom_themes/banx_bottom_sheet_theme.dart';
 import 'package:ban_x/utils/themes/custom_themes/banx_checkbox_theme.dart';
@@ -15,10 +16,10 @@ class BanXTheme{
     useMaterial3: true,
     fontFamily: 'Schyler',
     brightness: Brightness.light,
-    primaryColor: Colors.blue,
+    primaryColor: BanXColors.primaryColor,
     textTheme: BanXTextTheme.lightTextTheme,
     chipTheme: BanXChipTheme.lightChipTheme,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: BanXColors.lightBackground,
     appBarTheme: BanXAppBarTheme.lightAppBarTheme,
     checkboxTheme: BanXCheckBoxTheme.lightCheckboxTheme,
     bottomSheetTheme: BanXBottomSheetTheme.lightBottomSheetTheme,
@@ -32,10 +33,10 @@ class BanXTheme{
     useMaterial3: true,
     fontFamily: 'Schyler',
     brightness: Brightness.dark,
-    primaryColor: Colors.blue,
+    primaryColor: BanXColors.primaryColor,
     textTheme: BanXTextTheme.darkTextTheme,
     chipTheme: BanXChipTheme.darkChipTheme,
-    scaffoldBackgroundColor: Colors.black,
+    scaffoldBackgroundColor: BanXColors.darkBackground,
     appBarTheme: BanXAppBarTheme.darkAppBarTheme,
     checkboxTheme: BanXCheckBoxTheme.darkCheckboxTheme,
     bottomSheetTheme: BanXBottomSheetTheme.darkBottomSheetTheme,
