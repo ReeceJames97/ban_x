@@ -24,9 +24,9 @@ class BanXColors {
   static const Color secondaryTextColor = Color(0xFF6c757d);
 
   /// Background Colors
-  static const Color lightBackground = Color(0xFFf6f6f6);
+  static const Color lightBackground = Color(0xFFEEEEEE);
   static const Color darkBackground = Color(0xFF0F101B);
-  static const Color primaryBackground = Color(0xFFf3f5ff);
+  static const Color primaryBackground = Color(0xFFEEEEEE);
 
   /// Background Container Colors
   static const Color lightContainer = Color(0xFFf6f6f6);

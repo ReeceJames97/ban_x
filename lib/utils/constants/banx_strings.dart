@@ -20,4 +20,6 @@ class BanXString {
   static const String agreeTo = "I agree to";
   static const String privacyPolicy = "Privacy Policy";
   static const String termsOfUse = "Terms of use";
+  static const String doNotHaveAnAccount = "Don't have an account?";
+  static const String alreadyHaveAnAccount = "Already have an account?";
 }

@@ -15,7 +15,7 @@ class SignInController extends GetxController {
   }
 
   void onTapSignUp() {
-    HelperFunctions.navigateToScreen(const SignUpScreen());
+    HelperFunctions.navigateToScreenWithReplacement(const SignUpScreen());
   }
 
   /// Update isRememberMe
@@ -28,5 +28,9 @@ class SignInController extends GetxController {
   void updatePasswordVisible() {
     isPasswordVisible = (!isPasswordVisible.value).obs;
     update();
+  }
+
+  void onTapCreateText() {
+    HelperFunctions.navigateToScreenWithReplacement(const SignUpScreen());
   }
 }

@@ -49,6 +49,11 @@ class HelperFunctions {
         transition: Transition.rightToLeft, curve: Curves.easeInOut);
   }
 
+  static void navigateToScreenWithReplacement(Widget screen) {
+    Get.off(() => screen,
+        transition: Transition.rightToLeft, curve: Curves.easeInOut);
+  }
+
   static bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
   }

@@ -1,3 +1,4 @@
+import 'package:ban_x/screens/authentication/sign_in_screen.dart';
 import 'package:ban_x/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,5 +24,9 @@ class SignUpController extends GetxController {
   void updateAgreeToTerms(bool? newValue) {
     isAgreeToTerms = (newValue ?? false).obs;
     update();
+  }
+
+  void onTapLoginText() {
+    HelperFunctions.navigateToScreenWithReplacement(const SignInScreen());
   }
 }
