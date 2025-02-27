@@ -14,6 +14,10 @@ class BanXSizes {
   static const double iconMd = 24.0;
   static const double iconLg = 32.0;
 
+  /// Loading Size
+  static const double loadingLargeSize = 100.0;
+  static const double loadingMedianSize = 80.0;
+
   /// Font Sizes
   static const double fontSizeSm = 14.0;
   static const double fontSizeMd = 16.0;

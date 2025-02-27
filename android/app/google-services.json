@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1076947278008",
+    "project_id": "banx-61dcf",
+    "storage_bucket": "banx-61dcf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076947278008:android:0313e95bc9a7a73141bc4d",
+        "android_client_info": {
+          "package_name": "com.james.dev.ban_x"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076947278008-c06v4koc7beivo80ot2tt985l4f2c3l8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.james.dev.ban_x",
+            "certificate_hash": "fba6e26ccc70097395023dece63ce6ac58a6c790"
+          }
+        },
+        {
+          "client_id": "1076947278008-l7uclds90b9g80nsbprs271so4oimcvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSxPxtT4ocLPeitV8mfRGnRWR5BtzjUTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076947278008-l7uclds90b9g80nsbprs271so4oimcvh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076947278008-2id28gld92uacqat1tvboj1ucschlt70.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.james.dev.banx"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

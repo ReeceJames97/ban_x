@@ -1,3 +1,5 @@
+import 'package:ban_x/utils/constants/banx_strings.dart';
+import 'package:ban_x/utils/helpers/appbar_utils.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,6 +12,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Scaffold(
+      // appBar: getAppbar(BanXString.appName),
+      body: const Center(
+        child: Text(BanXString.appName),
+      ),
+    );
   }
 }

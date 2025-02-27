@@ -16,7 +16,7 @@ AppBar getAppbar(String title,
       iconTheme: const IconThemeData(color: Colors.white),
       systemOverlayStyle: getStatusBarStyle(),
       actions: actionWidget,
-      backgroundColor: backgroundColor ?? BanXColors.primaryColor,
+      backgroundColor: backgroundColor ?? BanXColors.appBarColor,
     );
   }else{
     return AppBar(
@@ -27,7 +27,7 @@ AppBar getAppbar(String title,
       systemOverlayStyle: getStatusBarStyle(),
       actions: actionWidget,
       toolbarHeight: BanXSizes.appBarHeight,
-      backgroundColor: backgroundColor ?? BanXColors.primaryColor,
+      backgroundColor: backgroundColor ?? BanXColors.appBarColor,
     );
   }
 

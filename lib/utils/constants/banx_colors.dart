@@ -8,6 +8,7 @@ class BanXColors {
   static const Color primaryColor = Color(0xFF2563EB);
   static const Color secondaryColor = Color(0xFFffe24b);
   static const Color accentColor = Color(0xFFb0c7ff);
+  static const Color appBarColor = Color(0xFF252B48);
 
   /// Gradient Colors
   static const Gradient linearGradient = LinearGradient(
@@ -20,13 +21,20 @@ class BanXColors {
       ]);
 
   /// Text Colors
-  static const Color primaryTextColor = Color(0xFF333333);
+  static const Color primaryTextColor = Color(0xFFFFFFFF);
   static const Color secondaryTextColor = Color(0xFF6c757d);
+
+  ///TextFieldsBorder Color
+  static const Color textFieldBorderColor = Color(0xFF6c757d);
 
   /// Background Colors
   static const Color lightBackground = Color(0xFFEEEEEE);
-  static const Color darkBackground = Color(0xFF0F101B);
-  static const Color primaryBackground = Color(0xFFEEEEEE);
+  static const Color darkBackground = Color(0xFF14142D);
+  static const Color navHeaderBackground = Color(0xFF1C1C3E);
+  static const Color primaryBackground = Color(0xFF141C3E);
+
+  ///Dialog Background
+  static const Color dialogBackground = Color(0xFF252B48);
 
   /// Background Container Colors
   static const Color lightContainer = Color(0xFFf6f6f6);

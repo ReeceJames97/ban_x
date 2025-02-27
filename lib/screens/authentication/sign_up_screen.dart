@@ -24,20 +24,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = HelperFunctions.isDarkMode(context);
-
     return Scaffold(
-        appBar: getAppbar(BanXString.appName),
+        appBar: getAppbar(BanXString.appName,
+            backgroundColor: BanXColors.primaryBackground),
         key: controller.scaffoldKey,
         resizeToAvoidBottomInset: true,
+        backgroundColor: BanXColors.primaryBackground,
         body: GetBuilder<SignUpController>(
             init: controller,
             builder: (_) => keyboardDismissView(
-                child: buildBodyWidget(controller, context, isDark))));
+                child: buildBodyWidget(controller, context))));  
   }
 
   Widget buildBodyWidget(
-      SignUpController controller, BuildContext context, bool isDark) {
+      SignUpController controller, BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.fromLTRB(
@@ -51,12 +51,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(height: BanXSizes.spaceBtwItems),
 
             /// Login Form
-            _buildLoginForm(context, isDark),
+            _buildLoginForm(context),
 
             const SizedBox(height: BanXSizes.spaceBtwItems),
 
             /// Divider and other options
-            _buildDivider(context, isDark),
+            _buildDivider(context),
           ],
         ),
       ),
@@ -78,52 +78,84 @@ class _SignUpScreenState extends State<SignUpScreen> {
               fit: BoxFit.fill),
         ),
 
-        Text(BanXString.loginTitle,
-            style: Theme.of(context).textTheme.headlineMedium),
+        const Text(BanXString.loginTitle,
+            style: TextStyle(
+                color: BanXColors.primaryTextColor,
+                fontSize: BanXSizes.lg,
+                fontWeight: FontWeight.bold)),
         const SizedBox(height: BanXSizes.sm),
-        Text(BanXString.signUpTitle,
-            style: Theme.of(context).textTheme.bodyMedium),
+        const Text(BanXString.signUpTitle,
+            style: TextStyle(
+                fontSize: BanXSizes.md,
+                fontWeight: FontWeight.bold,
+                color: BanXColors.secondaryTextColor)),
       ],
     );
   }
 
-  Widget _buildLoginForm(BuildContext context, bool isDark) {
+  Widget _buildLoginForm(BuildContext context) {
+
     /// Login Form
     return Form(
         child: Column(children: [
       ///User Name
       TextFormField(
+        style: const TextStyle(color: BanXColors.primaryTextColor),
         decoration: const InputDecoration(
-          prefixIcon: Icon(Iconsax.user_edit),
+          prefixIcon: Icon(Iconsax.user_edit, color: BanXColors.secondaryTextColor),
           labelText: BanXString.userName,
+          floatingLabelStyle: TextStyle(color: BanXColors.primaryTextColor),
+          labelStyle: TextStyle(color: BanXColors.primaryTextColor),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: BanXColors.textFieldBorderColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: BanXColors.primaryTextColor),
+          ),
         ),
       ),
 
       const SizedBox(height: BanXSizes.spaceBtwInputFields),
 
-      ///Email
       TextFormField(
+        style: const TextStyle(color: BanXColors.primaryTextColor),
         decoration: const InputDecoration(
-          prefixIcon: Icon(Iconsax.direct_right),
+          prefixIcon: Icon(Iconsax.direct_right, color: BanXColors.secondaryTextColor),
           labelText: BanXString.email,
+          floatingLabelStyle: TextStyle(color: BanXColors.primaryTextColor),
+          labelStyle: TextStyle(color: BanXColors.primaryTextColor),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: BanXColors.textFieldBorderColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: BanXColors.primaryTextColor),
+          ),
         ),
       ),
 
       const SizedBox(height: BanXSizes.spaceBtwInputFields),
 
-      ///Password
       Obx(
         () => TextFormField(
           obscureText: !(controller.isPasswordVisible.value),
+          style: const TextStyle(color: BanXColors.primaryTextColor),
           decoration: InputDecoration(
-            prefixIcon: const Icon(Iconsax.password_check),
+            prefixIcon: const Icon(Iconsax.password_check, color: BanXColors.secondaryTextColor),
             labelText: BanXString.password,
+            floatingLabelStyle: const TextStyle(color: BanXColors.primaryTextColor),
+            labelStyle: const TextStyle(color: BanXColors.primaryTextColor),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: BanXColors.textFieldBorderColor),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: BanXColors.primaryTextColor),
+            ),
             suffixIcon: IconButton(
               icon: Icon(
                 controller.isPasswordVisible.value
                     ? Icons.visibility
                     : Icons.visibility_off,
-                // color: AppColors.standardBtnColor
+                color: BanXColors.secondaryTextColor
               ),
               onPressed: () {
                 controller.updatePasswordVisible();
@@ -142,31 +174,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
               width: BanXSizes.lg,
               height: BanXSizes.lg,
               child: Checkbox(
+                  fillColor: MaterialStateProperty.all(BanXColors.primaryBackground),
                   value: controller.isAgreeToTerms.value,
                   onChanged: (value) {
                     controller.updateAgreeToTerms(value ?? false);
                   })),
           const SizedBox(width: BanXSizes.spaceBtwItems),
-          Text.rich(TextSpan(children: [
+          const Text.rich(TextSpan(children: [
             TextSpan(
                 text: "${BanXString.agreeTo} ",
-                style: Theme.of(context).textTheme.bodySmall),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                    color: BanXColors.secondaryTextColor)),
             TextSpan(
                 text: "${BanXString.privacyPolicy} ",
-                style: Theme.of(context).textTheme.bodyMedium!.apply(
-                    color: isDark ? Colors.white : BanXColors.primaryColor,
+                style: TextStyle(
+                    color: BanXColors.primaryTextColor,
                     decoration: TextDecoration.underline,
-                    decorationColor:
-                        isDark ? Colors.white : BanXColors.primaryColor)),
+                    decorationColor: BanXColors.primaryTextColor)),
             TextSpan(
-                text: "and ", style: Theme.of(context).textTheme.bodySmall),
+                text: "and ",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: BanXColors.secondaryTextColor)),
             TextSpan(
                 text: BanXString.termsOfUse,
-                style: Theme.of(context).textTheme.bodyMedium!.apply(
-                    color: isDark ? Colors.white : BanXColors.primaryColor,
+                style: TextStyle(
+                    color: BanXColors.primaryTextColor,
                     decoration: TextDecoration.underline,
-                    decorationColor:
-                        isDark ? Colors.white : BanXColors.primaryColor))
+                    decorationColor: BanXColors.primaryTextColor))
           ]))
         ],
       ),
@@ -178,33 +214,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
     ]));
   }
 
-  Widget _buildDivider(BuildContext context, bool isDark) {
+  Widget _buildDivider(BuildContext context) {
     return Column(
       children: [
         /// Already have an account text
         RichText(
             text: TextSpan(
                 text: '${BanXString.alreadyHaveAnAccount} ',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: BanXSizes.fontSizeSm,
-                    color: isDark ? BanXColors.darkerGrey : BanXColors.darkGrey,
-                    fontWeight: FontWeight.normal
-                    // fontFamily: "NexaBold"
-                    ),
+                    color: BanXColors.secondaryTextColor,
+                    fontWeight: FontWeight.bold
+                ),
                 children: [
               TextSpan(
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    controller.onTapLoginText();
-                  },
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      controller.onTapLoginText();
+                    },
                 text: BanXString.signIn,
-                style: TextStyle(
+                style: const TextStyle(
                   decoration: TextDecoration.underline,
                   fontSize: BanXSizes.fontSizeMd,
                   fontWeight: FontWeight.bold,
-                  // color: Colors.black
-                  color: isDark ? BanXColors.darkerGrey : BanXColors.black,
-                  // fontFamily: "NexaBold"
+                  color: BanXColors.primaryTextColor,
                 ),
               )
             ])),
@@ -212,24 +245,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const SizedBox(height: BanXSizes.spaceBtwItems),
 
         ///Divider
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
               child: Divider(
-                color: isDark ? BanXColors.darkerGrey : BanXColors.darkGrey,
+                color: BanXColors.secondaryTextColor,
                 thickness: 1,
                 indent: 60,
                 endIndent: 5,
               ),
             ),
-            const SizedBox(height: BanXSizes.xs),
+            SizedBox(height: BanXSizes.xs),
             Text(BanXString.orSignUpWith,
-                style: Theme.of(context).textTheme.labelMedium),
-            const SizedBox(height: BanXSizes.xs),
+                style: TextStyle(
+                    fontSize: BanXSizes.fontSizeMd,
+                    color: BanXColors.secondaryTextColor,
+                    fontWeight: FontWeight.bold)),
+            SizedBox(height: BanXSizes.xs),
             Flexible(
               child: Divider(
-                color: isDark ? BanXColors.darkerGrey : BanXColors.darkGrey,
+                color: BanXColors.secondaryTextColor,
                 thickness: 1,
                 indent: 5,
                 endIndent: 60,
@@ -243,7 +279,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ///Google Login
         GestureDetector(
           onTap: () {
-            // controller.loginWithGoogle();
+            controller.loginWithGoogle();
           },
           child: const CircleAvatar(
             maxRadius: 24,

@@ -24,22 +24,31 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = HelperFunctions.isDarkMode(context);
+    // final isDark = HelperFunctions.isDarkMode(context);
 
     return Scaffold(
-        appBar: getAppbar(BanXString.appName),
+        appBar: getAppbar(BanXString.appName,
+            backgroundColor: BanXColors.primaryBackground),
         key: controller.scaffoldKey,
         resizeToAvoidBottomInset: true,
+        backgroundColor: BanXColors.primaryBackground,
         body: GetBuilder<SignInController>(
             init: controller,
-            builder: (_) => keyboardDismissView(
-                  child: buildBodyWidget(context, isDark),
+            builder: (_) => SafeArea(
+                  child: buildBodyWidget(context),
                 )));
   }
 
-  Widget buildBodyWidget(BuildContext context, bool isDark) {
+  Widget buildBodyWidget(BuildContext context) {
     return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
       child: Container(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height -
+              MediaQuery.of(context).padding.top -
+              MediaQuery.of(context).padding.bottom -
+              kToolbarHeight,
+        ),
         margin: const EdgeInsets.fromLTRB(
             BanXSizes.md, 0, BanXSizes.md, BanXSizes.md),
         child: Column(
@@ -51,12 +60,12 @@ class _SignInScreenState extends State<SignInScreen> {
             const SizedBox(height: BanXSizes.spaceBtwItems),
 
             /// Login Form
-            _buildLoginForm(context, isDark),
+            _buildLoginForm(context),
 
             const SizedBox(height: BanXSizes.spaceBtwItems),
 
             /// Divider and other options
-            _buildDivider(context, isDark),
+            _buildDivider(context),
           ],
         ),
       ),
@@ -79,24 +88,41 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
 
         /// App title
-        Text(BanXString.loginTitle,
-            style: Theme.of(context).textTheme.headlineMedium),
+        const Text(BanXString.loginTitle,
+            style: TextStyle(
+                color: BanXColors.primaryTextColor,
+                fontSize: BanXSizes.lg,
+                fontWeight: FontWeight.bold)),
         const SizedBox(height: BanXSizes.sm),
-        Text(BanXString.loginSubTitle,
-            style: Theme.of(context).textTheme.bodyMedium),
+        const Text(BanXString.loginSubTitle,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: BanXSizes.md,
+                color: BanXColors.secondaryTextColor)),
       ],
     );
   }
 
   /// Login Form
-  Widget _buildLoginForm(BuildContext context, bool isDark) {
+  Widget _buildLoginForm(BuildContext context) {
     return Form(
         child: Column(children: [
       ///Email
       TextFormField(
+        style: const TextStyle(color: BanXColors.primaryTextColor),
         decoration: const InputDecoration(
-          prefixIcon: Icon(Iconsax.direct),
+          prefixIcon:
+              Icon(Iconsax.direct, color: BanXColors.secondaryTextColor),
           labelText: BanXString.email,
+          floatingLabelStyle:
+              const TextStyle(color: BanXColors.primaryTextColor),
+          labelStyle: TextStyle(color: BanXColors.primaryTextColor),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: BanXColors.textFieldBorderColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: BanXColors.primaryTextColor),
+          ),
         ),
       ),
 
@@ -106,16 +132,26 @@ class _SignInScreenState extends State<SignInScreen> {
       Obx(
         () => TextFormField(
           obscureText: !(controller.isPasswordVisible.value),
+          style: const TextStyle(color: BanXColors.primaryTextColor),
           decoration: InputDecoration(
-            prefixIcon: const Icon(Iconsax.password_check),
+            prefixIcon: const Icon(Iconsax.password_check,
+                color: BanXColors.secondaryTextColor),
             labelText: BanXString.password,
+            floatingLabelStyle:
+                const TextStyle(color: BanXColors.primaryTextColor),
+            labelStyle: const TextStyle(color: BanXColors.primaryTextColor),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: BanXColors.textFieldBorderColor),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: BanXColors.primaryTextColor),
+            ),
             suffixIcon: IconButton(
               icon: Icon(
-                controller.isPasswordVisible.value
-                    ? Icons.visibility
-                    : Icons.visibility_off,
-                // color: AppColors.standardBtnColor
-              ),
+                  controller.isPasswordVisible.value
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                  color: BanXColors.secondaryTextColor),
               onPressed: () {
                 controller.updatePasswordVisible();
               },
@@ -131,14 +167,14 @@ class _SignInScreenState extends State<SignInScreen> {
           contentPadding: EdgeInsets.zero,
           horizontalTitleGap: 0.0,
           child: CheckboxListTile(
+            fillColor: WidgetStateProperty.all(BanXColors.primaryBackground),
             visualDensity:
                 const VisualDensity(horizontal: -1.0, vertical: -4.0),
             title: const Text(
               BanXString.rememberMe,
-              // style: TextStyle(
-              //     fontSize: ScreenUtil().setSp(28),
-              //     color: AppColors.standardBtnColor,
-              //     fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: BanXColors.primaryTextColor,
+                  fontSize: BanXSizes.fontSizeSm),
             ),
             value: controller.isRememberMe.value,
             onChanged: (newValue) {
@@ -150,41 +186,22 @@ class _SignInScreenState extends State<SignInScreen> {
 
       const SizedBox(height: BanXSizes.sm),
 
-      Row(
-        children: [
-          ///Sign In Button
-          Expanded(
-              flex: 1,
-              child: customStandardBtn(BanXString.signIn,
-                  callBack: controller.onTapSignIn)),
-
-          const SizedBox(width: BanXSizes.sm),
-
-          ///Sign Up Button
-          Expanded(
-            flex: 1,
-            child: customStandardBtn(BanXString.signUp,
-                buttonColor: BanXColors.secondaryBtnColor,
-                callBack: controller.onTapSignUp),
-          )
-        ],
-      ),
+      ///Sign In Button
+      customStandardBtn(BanXString.signIn, callBack: controller.onTapSignIn),
     ]));
   }
 
-  Widget _buildDivider(BuildContext context, bool isDark) {
+  Widget _buildDivider(BuildContext context) {
     return Column(
       children: [
         /// Don't have an account text
         RichText(
             text: TextSpan(
                 text: '${BanXString.doNotHaveAnAccount} ',
-                style: TextStyle(
-                    fontSize: BanXSizes.fontSizeSm,
-                    color: Colors.grey[800],
-                    fontWeight: FontWeight.normal
-                    // fontFamily: "NexaBold"
-                    ),
+                style: const TextStyle(
+                    fontSize: BanXSizes.fontSizeMd,
+                    color: BanXColors.secondaryTextColor,
+                    fontWeight: FontWeight.bold),
                 children: [
               TextSpan(
                 recognizer: TapGestureRecognizer()
@@ -196,33 +213,34 @@ class _SignInScreenState extends State<SignInScreen> {
                     decoration: TextDecoration.underline,
                     fontSize: BanXSizes.fontSizeMd,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black
-                    // fontFamily: "NexaBold"
-                    ),
+                    color: BanXColors.primaryTextColor),
               )
             ])),
 
         const SizedBox(height: BanXSizes.spaceBtwItems),
 
         ///Divider
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
               child: Divider(
-                color: isDark ? BanXColors.darkerGrey : BanXColors.darkGrey,
+                color: BanXColors.darkerGrey,
                 thickness: 1,
                 indent: 60,
                 endIndent: 5,
               ),
             ),
-            const SizedBox(height: BanXSizes.xs),
+            SizedBox(height: BanXSizes.xs),
             Text(BanXString.orSignInWith,
-                style: Theme.of(context).textTheme.labelMedium),
-            const SizedBox(height: BanXSizes.xs),
+                style: TextStyle(
+                    fontSize: BanXSizes.fontSizeMd,
+                    color: BanXColors.secondaryTextColor,
+                    fontWeight: FontWeight.bold)),
+            SizedBox(height: BanXSizes.xs),
             Flexible(
               child: Divider(
-                color: isDark ? BanXColors.darkerGrey : BanXColors.darkGrey,
+                color: BanXColors.darkerGrey,
                 thickness: 1,
                 indent: 5,
                 endIndent: 60,
@@ -236,7 +254,7 @@ class _SignInScreenState extends State<SignInScreen> {
         ///Google Login
         GestureDetector(
           onTap: () {
-            // controller.loginWithGoogle();
+            controller.loginWithGoogle();
           },
           child: const CircleAvatar(
             maxRadius: 24,
