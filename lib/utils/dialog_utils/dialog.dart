@@ -14,12 +14,18 @@ void showConfirmDialog(Function confirmCallBack) {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      backgroundColor: BanXColors.lightBackground,
+      backgroundColor: BanXColors.dialogBackground,
       title: const Text(
         BanXString.confirm,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(
+          color: BanXColors.primaryTextColor,
+            fontWeight: FontWeight.bold),
       ),
-      content: const Text(BanXString.areYouSureYouWantToDoThis),
+      content: const Text(BanXString.areYouSureYouWantToDoThis,
+      style: TextStyle(
+          color: BanXColors.primaryTextColor,
+          fontWeight: FontWeight.bold
+      ),),
       actions: [
         TextButton(
           onPressed: () => Get.back(),
@@ -27,7 +33,7 @@ void showConfirmDialog(Function confirmCallBack) {
             BanXString.no,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: BanXColors.dialogBackground,
+              color: BanXColors.primaryTextColor,
             ),
           ),
         ),
@@ -40,7 +46,7 @@ void showConfirmDialog(Function confirmCallBack) {
             BanXString.yes,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: BanXColors.dialogBackground,
+              color: BanXColors.primaryTextColor,
             ),
           ),
         ),
