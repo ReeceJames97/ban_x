@@ -39,38 +39,38 @@ dependencies:
 
   #Icons
   cupertino_icons: ^1.0.8
-  iconsax: ^0.0.8
-  material_design_icons_flutter: ^7.0.7296
+  iconsax:
+  material_design_icons_flutter:
 
   #State Management
-  get: ^4.6.6
-  get_storage: ^2.1.1
+  get:
+  get_storage:
 
   #Utility
-  http: ^1.2.2
-  intl: ^0.19.0
-  logger: ^2.4.0
-  url_launcher: ^6.1.10
+  http:
+  intl:
+  logger:
+  url_launcher:
 
   #Api Call
-  dio: ^4.0.6
-  retrofit: ^3.3.1
-  json_annotation: ^4.8.1
+  dio:
+  retrofit:
+  json_annotation:
 
   #Animation
-  loading_animation_widget: ^1.3.0
+  loading_animation_widget:
 
   #Firebase
-  firebase_core: ^3.12.0
-  firebase_auth: ^5.5.0
+  firebase_core:
+  firebase_auth:
 
   #Google Sign In
-  google_sign_in: ^6.2.2
+  google_sign_in:
 
   #Others
-  lottie: ^3.1.3
-  shared_preferences: ^2.5.2
-  flutter_svg: ^2.0.7
+  lottie:
+  shared_preferences:
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:

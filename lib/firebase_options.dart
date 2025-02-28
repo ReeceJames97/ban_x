@@ -55,6 +55,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1076947278008',
     projectId: 'banx-61dcf',
     storageBucket: 'banx-61dcf.firebasestorage.app',
+    androidClientId:
+        '1076947278008-c06v4koc7beivo80ot2tt985l4f2c3l8.apps.googleusercontent.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
