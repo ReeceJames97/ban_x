@@ -1,5 +1,4 @@
 import 'package:ban_x/utils/constants/banx_strings.dart';
-import 'package:ban_x/utils/helpers/appbar_utils.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {

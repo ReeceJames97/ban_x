@@ -5,7 +5,6 @@ import 'package:ban_x/utils/constants/banx_colors.dart';
 import 'package:ban_x/utils/constants/banx_sizes.dart';
 import 'package:ban_x/utils/constants/banx_strings.dart';
 import 'package:ban_x/utils/helpers/appbar_utils.dart';
-import 'package:ban_x/utils/helpers/helper_functions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -174,7 +173,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               width: BanXSizes.lg,
               height: BanXSizes.lg,
               child: Checkbox(
-                  fillColor: MaterialStateProperty.all(BanXColors.primaryBackground),
+                  fillColor:
+                      WidgetStateProperty.all(BanXColors.primaryBackground),
                   value: controller.isAgreeToTerms.value,
                   onChanged: (value) {
                     controller.updateAgreeToTerms(value ?? false);

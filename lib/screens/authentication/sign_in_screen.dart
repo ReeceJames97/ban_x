@@ -112,8 +112,7 @@ class _SignInScreenState extends State<SignInScreen> {
           prefixIcon:
               Icon(Iconsax.direct, color: BanXColors.secondaryTextColor),
           labelText: BanXString.email,
-          floatingLabelStyle:
-              const TextStyle(color: BanXColors.primaryTextColor),
+          floatingLabelStyle: TextStyle(color: BanXColors.primaryTextColor),
           labelStyle: TextStyle(color: BanXColors.primaryTextColor),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: BanXColors.textFieldBorderColor),
