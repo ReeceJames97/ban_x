@@ -1,5 +1,5 @@
-import 'package:ban_x/utils/constants/banx_strings.dart';
-import 'package:ban_x/utils/helpers/appbar_utils.dart';
+import 'package:ban_x/utils/constants/banx_colors.dart';
+import 'package:ban_x/utils/constants/banx_sizes.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,9 +14,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: getAppbar(BanXString.appName),
-      body: const Center(
-        child: Text(BanXString.appName),
-      ),
+      body: SingleChildScrollView(
+          child: Container(
+        color: BanXColors.primaryBackground,
+        margin: const EdgeInsets.all(BanXSizes.lg),
+        child: Column(
+          children: [],
+        ),
+      )),
     );
   }
 }

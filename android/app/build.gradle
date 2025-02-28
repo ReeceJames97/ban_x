@@ -30,14 +30,53 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = flutter.versionCode.toInteger()
-        versionName = flutter.versionName
+        versionName = "v1.0.0"
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
+            signingConfig signingConfigs.release
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            jniDebuggable false
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //useProguard true
+
+            ndk {
+//                abiFilters 'armeabi-v7a'
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            }
+        }
+
+        debug {
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //useProguard false
+
+            ndk {
+//                abiFilters 'armeabi-v7a'
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            }
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4G"
+    }
+
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/library_release.kotlin_module', 'META-INF/DEPENDENCIES.txt', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module']
         }
     }
 }
