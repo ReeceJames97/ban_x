@@ -63,6 +63,7 @@ dependencies:
   #Firebase
   firebase_core:
   firebase_auth:
+  cloud_firestore:
 
   #Google Sign In
   google_sign_in:
@@ -71,6 +72,9 @@ dependencies:
   lottie:
   shared_preferences:
   flutter_svg:
+  shimmer: ^3.0.0
+  flutter_pretty_dio_logger:
+  pull_to_refresh:
 
 dev_dependencies:
   flutter_test:

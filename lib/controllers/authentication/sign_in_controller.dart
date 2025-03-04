@@ -6,6 +6,7 @@ import 'package:ban_x/utils/constants/banx_constants.dart';
 import 'package:ban_x/utils/constants/banx_strings.dart';
 import 'package:ban_x/utils/dialog_utils/dialog.dart';
 import 'package:ban_x/utils/helpers/helper_functions.dart';
+import 'package:ban_x/utils/logger/logger_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,23 +48,41 @@ class SignInController extends GetxController {
   }
 
   Future<void> onTapSignIn() async{
-    String email = getEmptyString(txtEmailController.text.trim().toString());
-    String password =
-    getEmptyString(txtPasswordController.text.trim().toString());
+    String email = getEmptyString(txtEmailController.text.trim());
+    String password = getEmptyString(txtPasswordController.text.trim());
+
+    if (!GetUtils.isEmail(email)) {
+      HelperFunctions.showSnackBar("Please enter a valid email address");
+      return;
+    }
+
+    if (password.length < 6) {
+      HelperFunctions.showSnackBar("Password should be at least 6 characters");
+      return;
+    }
 
     if (isNotNullEmptyString(email) && isNotNullEmptyString(password)) {
-      showLoadingDialog();
-      bool loginResult = await AuthController.instance.login(email, password);
+      try {
+        showLoadingDialog();
+        bool loginResult = await AuthController.instance.login(email, password);
 
-      if (loginResult) {
-        prefs?.setString(BanXConstants.USER_EMAIL, email);
-        update();
+        if (loginResult) {
+          await prefs?.setString(BanXConstants.USER_EMAIL, email);
+          if (isRememberMe.value) {
+            await prefs?.setBool(BanXConstants.REMEMBER_ME, true);
+          }
+          update();
+          hideDialog();
+          HelperFunctions.showSnackBar(BanXString.loginSuccessfully);
+          Get.off(() => const MainNavigator());
+        } else {
+          hideDialog();
+          HelperFunctions.showSnackBar(BanXString.loginFailed);
+        }
+      } catch (e) {
         hideDialog();
-        HelperFunctions.showSnackBar(BanXString.loginSuccessfully);
-        Get.off(() => const MainNavigator());
-      } else {
-        hideDialog();
-        HelperFunctions.showSnackBar(BanXString.loginFailed);
+        HelperFunctions.showSnackBar("An error occurred during login");
+        LoggerUtils.debug('Login error: $e');
       }
     } else {
       HelperFunctions.showSnackBar(BanXString.plsEnterEmailAndPassword);
@@ -78,7 +97,7 @@ class SignInController extends GetxController {
 
   ///Update isPasswordVisible
   void updatePasswordVisible() {
-    isPasswordVisible = (!isPasswordVisible.value).obs;
+    isPasswordVisible.value = !isPasswordVisible.value;
     update();
   }
 
@@ -86,11 +105,14 @@ class SignInController extends GetxController {
     try {
       showLoadingDialog();
 
-      final GoogleSignInAccount? googleSignInAccount =
-      await googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount!.authentication;
+      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      if (googleSignInAccount == null) {
+        hideDialog();
+        HelperFunctions.showSnackBar("Google sign-in cancelled");
+        return;
+      }
 
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
@@ -98,26 +120,28 @@ class SignInController extends GetxController {
 
       final authResult = await _auth.signInWithCredential(credential);
       final User? user = authResult.user;
+      if (user == null) {
+        throw Exception("Failed to sign in with Google");
+      }
 
-      assert(!user!.isAnonymous);
-      assert(await user?.getIdToken() != null);
-
-      final User? currentUser = _auth.currentUser;
-      assert(user?.uid == currentUser?.uid);
+      await prefs?.setString(BanXConstants.USER_EMAIL, user.email ?? '');
+      await prefs?.setString(BanXConstants.USER_NAME, user.displayName ?? '');
+      if (isRememberMe.value) {
+        await prefs?.setBool(BanXConstants.REMEMBER_ME, true);
+      }
 
       hideDialog();
       Get.off(() => const MainNavigator());
       update();
     } catch (e) {
       hideDialog();
-      // Handle and display the error
-      HelperFunctions.showSnackBar("Error during Google sign-in: $e");
+      HelperFunctions.showSnackBar("Error during Google sign-in: ${e.toString()}");
+      LoggerUtils.debug('Google sign-in error: $e');
       update();
     }
   }
 
   void onTapCreateText() {
-    // HelperFunctions.navigateToScreenWithReplacement(const SignUpScreen());
     Get.off(() => const SignUpScreen());
   }
 }

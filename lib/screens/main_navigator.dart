@@ -4,6 +4,7 @@ import 'package:ban_x/screens/nav_bar.dart';
 import 'package:ban_x/screens/settings_screen.dart';
 import 'package:ban_x/utils/constants/banx_colors.dart';
 import 'package:ban_x/utils/constants/banx_strings.dart';
+import 'package:ban_x/utils/helpers/appbar_utils.dart';
 import 'package:ban_x/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,14 +29,8 @@ class _MainNavigatorState extends State<MainNavigator> {
         init: MainNavigatorController(),
         builder: (_) => Scaffold(
           key: controller.key,
-          appBar: AppBar(
-            title: Obx(() => Text(controller.appBarTitle.value)),
-            centerTitle: true,
-            titleTextStyle: const TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-            backgroundColor: BanXColors.dialogBackground,
-            iconTheme: const IconThemeData(color: Colors.white),
-          ),
+          appBar: getAppbar(BanXString.appName,
+              backgroundColor: BanXColors.primaryBackground),
           drawer: const NavBar(),
           body: buildBodyView(controller.appBarTitle.value),
           resizeToAvoidBottomInset: true,
@@ -68,13 +63,9 @@ class _MainNavigatorState extends State<MainNavigator> {
       return const HomeScreen();
     } else {
       switch (title) {
-        case "CheckIn":
-          controller.appBarTitle = "CheckIn".obs;
-          return const SettingsScreen();
-
-        case "Profile":
-          controller.appBarTitle = "Profile".obs;
-          return const SettingsScreen();
+        case "Home":
+          controller.appBarTitle = "Home".obs;
+          return const HomeScreen();
 
         case "Settings":
           controller.appBarTitle = "Settings".obs;

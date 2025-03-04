@@ -41,27 +41,25 @@ class _NavBarState extends State<NavBar> {
                           child: (controller.photoUrl.isNotEmpty)
                               ? CircleAvatar(
                               backgroundColor: BanXColors.primaryBackground,
-                              radius: 42,
+                              radius: 37,
                               child: CircleAvatar(
-                                  maxRadius: 40,
+                                  maxRadius: 35,
                                   backgroundImage:
                                   NetworkImage(controller.photoUrl)))
                               : CircleAvatar(
                             backgroundColor: BanXColors.primaryBackground,
-                            radius: 42,
+                            radius: 37,
                             child: CircleAvatar(
-                              maxRadius: 40,
+                              maxRadius: 35,
                               backgroundColor: BanXColors.primaryBackground,
                               child: SvgPicture.asset(
                                 'assets/images/profile.svg',
-                                width: 90,
-                                height: 90,
+                                width: 80,
+                                height: 80,
                               ),
                             ),
                           ),
                         ),
-
-                        // const SizedBox(height: BanXSizes.sm),
 
                         ///Name
                         (controller.userName.isNotEmpty)
@@ -89,8 +87,6 @@ class _NavBarState extends State<NavBar> {
                           ),
                         ),
 
-                        // const SizedBox(height: BanXSizes.sm),
-
                         ///Email
                         (controller.userMail.isNotEmpty)
                             ? Expanded(
@@ -116,72 +112,27 @@ class _NavBarState extends State<NavBar> {
                             // fontFamily: "NexaBold"
                           ),
                         ),
-
-                        // const SizedBox(height: BanXSizes.sm),
                       ],
                     ),
                   ),
                 ),
+
                 ListTile(
                   onTap: () {
-                    controller.appBarTitle = "CheckIn".obs;
+                    controller.appBarTitle = "Home".obs;
                     controller.key.currentState?.closeDrawer();
                     controller.update();
                   },
-                  leading:  Icon(MdiIcons.calendarCheck,
+                  leading:  Icon(MdiIcons.home,
                       size: 30,
                       color: BanXColors.grey),
-                  title: const Text('CheckIn',
+                  title: const Text('Home',
                       style: TextStyle(
                           fontSize: BanXSizes.md,
                           color: BanXColors.grey
                       )),
                 ),
-                ListTile(
-                  onTap: () {
-                    controller.appBarTitle = "Profile".obs;
-                    controller.key.currentState?.closeDrawer();
-                    controller.update();
-                  },
-                  leading: Icon(MdiIcons.accountCircle,
-                      size: 30,
-                      color: BanXColors.grey),
-                  title: const Text('Profile',
-                      style: TextStyle(
-                          fontSize: BanXSizes.md,
-                          color: BanXColors.grey
-                      )),
-                ),
-                ListTile(
-                  onTap: () {
-                    controller.appBarTitle = "Users".obs;
-                    controller.key.currentState?.closeDrawer();
-                    controller.update();
-                  },
-                  leading: const Icon(Icons.people,
-                  size: 30,
-                      color: BanXColors.grey),
-                  title: const Text('Users',
-                      style: TextStyle(
-                        fontSize: BanXSizes.md,
-                        color: BanXColors.grey
-                      )),
-                ),
-                ListTile(
-                  onTap: () {
-                    controller.appBarTitle = "AttendanceHistory".obs;
-                    controller.key.currentState?.closeDrawer();
-                    controller.update();
-                  },
-                  leading: const Icon(Icons.history,
-                      size: 30,
-                      color: BanXColors.grey),
-                  title: const Text('Attendance History',
-                      style: TextStyle(
-                          fontSize: BanXSizes.md,
-                          color: BanXColors.grey
-                      )),
-                ),
+
                 ListTile(
                   onTap: () {
                     controller.appBarTitle = "Settings".obs;
@@ -211,17 +162,20 @@ class _NavBarState extends State<NavBar> {
                   height: BanXSizes.sm,
                 ),
                 ListTile(
-                  onTap: () {
+                  onTap: () async {
                     showConfirmDialog(controller.confirmLogout);
                   },
                   leading: const Icon(Icons.logout,
                       size: 30,
                       color: BanXColors.grey),
-                  title: const Text(BanXString.logout,
+                  title: const Text('Logout',
                       style: TextStyle(
                           fontSize: BanXSizes.md,
                           color: BanXColors.grey
                       )),
+                ),
+                const SizedBox(
+                  height: BanXSizes.md,
                 ),
               ]),
         ));

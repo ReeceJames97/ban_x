@@ -11,4 +11,6 @@ class BanXConstants {
   static const String USER_ID = "user_id";
   static const String USER_EMAIL = "user_email";
   static const String PASS_WORD = "password";
+  static const String FIREBASE_COLLECTION_NAME = "BanId";
+  static const String REMEMBER_ME = "remember_me";
 }

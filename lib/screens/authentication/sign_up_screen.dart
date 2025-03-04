@@ -99,6 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Column(children: [
       ///User Name
       TextFormField(
+        controller: controller.txtNameController,
         style: const TextStyle(color: BanXColors.primaryTextColor),
         decoration: const InputDecoration(
           prefixIcon: Icon(Iconsax.user_edit, color: BanXColors.secondaryTextColor),
@@ -117,6 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       const SizedBox(height: BanXSizes.spaceBtwInputFields),
 
       TextFormField(
+        controller: controller.txtEmailController,
         style: const TextStyle(color: BanXColors.primaryTextColor),
         decoration: const InputDecoration(
           prefixIcon: Icon(Iconsax.direct_right, color: BanXColors.secondaryTextColor),
@@ -136,6 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       Obx(
         () => TextFormField(
+          controller: controller.txtPasswordController,
           obscureText: !(controller.isPasswordVisible.value),
           style: const TextStyle(color: BanXColors.primaryTextColor),
           decoration: InputDecoration(
@@ -185,6 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 text: "${BanXString.agreeTo} ",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                    fontSize: BanXSizes.fontSizeSm,
                     color: BanXColors.secondaryTextColor)),
             TextSpan(
                 text: "${BanXString.privacyPolicy} ",
@@ -195,6 +199,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             TextSpan(
                 text: "and ",
                 style: TextStyle(
+                    fontSize: BanXSizes.fontSizeSm,
                     fontWeight: FontWeight.bold,
                     color: BanXColors.secondaryTextColor)),
             TextSpan(
@@ -259,7 +264,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: BanXSizes.xs),
             Text(BanXString.orSignUpWith,
                 style: TextStyle(
-                    fontSize: BanXSizes.fontSizeMd,
+                    fontSize: BanXSizes.fontSizeSm,
                     color: BanXColors.secondaryTextColor,
                     fontWeight: FontWeight.bold)),
             SizedBox(height: BanXSizes.xs),

@@ -5,13 +5,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'controllers/main_navigator_controller.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
   ///Firebase Initialization
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) => Get.put(AuthController()));
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) {
+    Get.put(AuthController());
+    Get.put(MainNavigatorController());
+  });
   runApp(const App());
 }
 

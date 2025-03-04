@@ -1,4 +1,5 @@
 import 'package:ban_x/common/widgets/custom_standard_button.dart';
+import 'package:ban_x/common/widgets/keyboard_dimiss_view.dart';
 import 'package:ban_x/controllers/authentication/sign_in_controller.dart';
 import 'package:ban_x/utils/constants/banx_colors.dart';
 import 'package:ban_x/utils/constants/banx_sizes.dart';
@@ -33,7 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
         body: GetBuilder<SignInController>(
             init: controller,
             builder: (_) => SafeArea(
-                  child: buildBodyWidget(context),
+                  child: keyboardDismissView(child: buildBodyWidget(context)),
                 )));
   }
 
@@ -107,10 +108,11 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Column(children: [
       ///Email
       TextFormField(
+        controller: controller.txtEmailController,
         style: const TextStyle(color: BanXColors.primaryTextColor),
         decoration: const InputDecoration(
           prefixIcon:
-              Icon(Iconsax.direct, color: BanXColors.secondaryTextColor),
+              Icon(Iconsax.direct_right, color: BanXColors.secondaryTextColor),
           labelText: BanXString.email,
           floatingLabelStyle: TextStyle(color: BanXColors.primaryTextColor),
           labelStyle: TextStyle(color: BanXColors.primaryTextColor),
@@ -128,6 +130,7 @@ class _SignInScreenState extends State<SignInScreen> {
       ///Password
       Obx(
         () => TextFormField(
+          controller: controller.txtPasswordController,
           obscureText: !(controller.isPasswordVisible.value),
           style: const TextStyle(color: BanXColors.primaryTextColor),
           decoration: InputDecoration(
@@ -196,7 +199,7 @@ class _SignInScreenState extends State<SignInScreen> {
             text: TextSpan(
                 text: '${BanXString.doNotHaveAnAccount} ',
                 style: const TextStyle(
-                    fontSize: BanXSizes.fontSizeMd,
+                    fontSize: BanXSizes.fontSizeSm,
                     color: BanXColors.secondaryTextColor,
                     fontWeight: FontWeight.bold),
                 children: [
@@ -231,7 +234,7 @@ class _SignInScreenState extends State<SignInScreen> {
             SizedBox(height: BanXSizes.xs),
             Text(BanXString.orSignInWith,
                 style: TextStyle(
-                    fontSize: BanXSizes.fontSizeMd,
+                    fontSize: BanXSizes.fontSizeSm,
                     color: BanXColors.secondaryTextColor,
                     fontWeight: FontWeight.bold)),
             SizedBox(height: BanXSizes.xs),

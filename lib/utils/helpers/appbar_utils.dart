@@ -8,20 +8,43 @@ import 'package:flutter/services.dart';
 
 AppBar getAppbar(String title,
     {Color? backgroundColor, List<Widget>? actionWidget}) {
-  if( !kIsWeb && Platform.isAndroid){
+  Widget richTitle = RichText(
+    text: TextSpan(
+      children: [
+        TextSpan(
+          text: "Ban", // White text
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20, // Adjust as needed
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+        TextSpan(
+          text: "X", // Bold Red text
+          style: const TextStyle(
+            color: Colors.red,
+            fontSize: 22, // Slightly larger if needed
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    ),
+  );
+
+  if (!kIsWeb && Platform.isAndroid) {
     return AppBar(
       elevation: 5,
-      title: Text(title, style: const TextStyle(color: Colors.white),),
+      title: richTitle,
       centerTitle: true,
       iconTheme: const IconThemeData(color: Colors.white),
       systemOverlayStyle: getStatusBarStyle(),
       actions: actionWidget,
       backgroundColor: backgroundColor ?? BanXColors.appBarColor,
     );
-  }else{
+  } else {
     return AppBar(
       elevation: 5,
-      title: Text(title, style: const TextStyle(color: Colors.white),),
+      title: richTitle,
       centerTitle: true,
       iconTheme: const IconThemeData(color: Colors.white),
       systemOverlayStyle: getStatusBarStyle(),
@@ -30,7 +53,6 @@ AppBar getAppbar(String title,
       backgroundColor: backgroundColor ?? BanXColors.appBarColor,
     );
   }
-
 }
 
 SystemUiOverlayStyle getStatusBarStyle(){

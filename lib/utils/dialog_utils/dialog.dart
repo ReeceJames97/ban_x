@@ -82,6 +82,7 @@ Future<void> showLoadingDialog() async {
   );
 }
 
+
 void hideDialog() {
   if (mDialog != null) {
     mDialog = null;

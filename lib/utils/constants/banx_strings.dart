@@ -1,6 +1,6 @@
 class BanXString {
 
-  static const String appName = "Ban_X";
+  static const String appName = "Ban";
   static const String appVersion = "v1.0.0";
 
 
@@ -37,4 +37,13 @@ class BanXString {
   static const String logout = "Logout";
   static const String settings = "Settings";
   static const String name = "Name";
+  static const String searchByIdOrName = "Search by ID or Name";
+  static const String add = "Add";
+  static const String enterId = "Enter ID";
+  static const String enterName = "Enter Name";
+  static const String update = "Update";
+  static const String fail = "Fail!";
+  static const String tryAgain = "Try Again!";
+  static const String emptyData = "Empty Data!";
+  static const String nothingToShow = "There is nothing to show!";
 }

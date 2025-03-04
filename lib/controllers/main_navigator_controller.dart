@@ -43,7 +43,6 @@ class MainNavigatorController extends GetxController {
     prefs?.setString(BanXConstants.USER_ID, uid);
     UsersModel.userEmail = prefs?.getString(BanXConstants.USER_EMAIL) ?? "";
     UsersModel.userId = prefs?.getString(BanXConstants.USER_ID) ?? "";
-
   }
 
   ///Confirm Logout
