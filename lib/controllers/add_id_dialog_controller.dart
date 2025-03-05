@@ -59,13 +59,17 @@ class AddIdDialogController extends GetxController {
 
       await apiServices.addBanId(userData);
       HelperFunctions.showSnackBar("Ban ID added successfully!");
-      // Clear form fields after successful addition
+
       txtIdController.clear();
       txtNameController.clear();
       selectedStatus = 'ban id';
       update();
       hideDialog();
     } catch (e) {
+      txtIdController.clear();
+      txtNameController.clear();
+      selectedStatus = 'ban id';
+      update();
       hideDialog();
       HelperFunctions.showSnackBar("Error: ${e.toString()}");
     } finally {

@@ -64,6 +64,7 @@ dependencies:
   firebase_core:
   firebase_auth:
   cloud_firestore:
+  firebase_storage:
 
   #Google Sign In
   google_sign_in:
@@ -75,6 +76,7 @@ dependencies:
   shimmer: ^3.0.0
   flutter_pretty_dio_logger:
   pull_to_refresh:
+  image_picker:
 
 dev_dependencies:
   flutter_test:

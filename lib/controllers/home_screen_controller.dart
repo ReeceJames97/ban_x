@@ -13,7 +13,7 @@ class HomeScreenController extends GetxController {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final txtSearchController = TextEditingController();
-  final firestore = FirebaseFirestore.instance;
+  final fireStore = FirebaseFirestore.instance;
   RxList<BanItem> items = <BanItem>[].obs;
   RxString searchQuery = ''.obs;
   RxList<BanItem> filteredItems = <BanItem>[].obs;

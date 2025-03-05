@@ -129,6 +129,7 @@ class SignUpController extends GetxController {
 
       await prefs?.setString(BanXConstants.USER_EMAIL, user.email ?? '');
       await prefs?.setString(BanXConstants.USER_NAME, user.displayName ?? '');
+      await prefs?.setString(BanXConstants.USER_PHOTO, user.photoURL ?? '');
       update();
 
       hideDialog();

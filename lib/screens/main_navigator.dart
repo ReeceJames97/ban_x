@@ -45,14 +45,13 @@ class _MainNavigatorState extends State<MainNavigator> {
       crrTime = now;
       HelperFunctions.showSnackBar("Press Back Button Again to Exit");
       controller.update();
-      // Close the drawer if open, otherwise proceed with back button logic
       if (controller.key.currentState?.isDrawerOpen ?? false) {
         controller.key.currentState?.openEndDrawer();
       } else {
-        return Future.value(false); // Prevent immediate exit
+        return Future.value(false);
       }
     } else {
-      return Future.value(true); // Allow exit on second back press
+      return Future.value(true);
     }
     return Future.value(true);
   }

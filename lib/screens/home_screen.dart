@@ -53,8 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       enablePullDown: true,
       header: const WaterDropHeader(
-        waterDropColor: Colors.white,
-        complete: Icon(Icons.check, color: Colors.white),
+        waterDropColor: Colors.blueAccent,
+        complete: Icon(Icons.check, color: Colors.blueAccent),
         failed: Icon(Icons.close, color: Colors.red),
       ),
       child: Container(
@@ -72,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: controller.txtSearchController,
                 style: const TextStyle(color: Colors.white),
                 onChanged: (value) => controller.updateSearchQuery(value),
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: 'Search by ID',
                   hintStyle: const TextStyle(color: Colors.grey),
@@ -301,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return Container(
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.05),
+                  color: Colors.white.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Padding(
@@ -327,8 +328,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       horizontal: 8, vertical: 4),
                                   decoration: BoxDecoration(
                                     color: item['status'] == 'ban id'
-                                        ? Colors.red.withOpacity(0.2)
-                                        : Colors.orange.withOpacity(0.2),
+                                        ? Colors.red.withValues(alpha: 0.2)
+                                        : Colors.orange.withValues(alpha: 0.2),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Text(

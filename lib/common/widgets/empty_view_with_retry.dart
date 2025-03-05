@@ -1,6 +1,6 @@
 import 'package:ban_x/utils/constants/banx_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 
 class EmptyViewWithRetry extends StatelessWidget {
   final VoidCallback onRetry;
@@ -18,14 +18,13 @@ class EmptyViewWithRetry extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            'assets/images/ic_empty.svg',
-            width: 120,
-            height: 120,
-            colorFilter: const ColorFilter.mode(
-              Colors.grey,
-              BlendMode.srcIn,
-            ),
+          Container(
+            child: Lottie.asset('assets/lotties/empty_box.json',
+                width: 140,
+                height: 130,
+                animate: true,
+                repeat: true,
+                fit: BoxFit.fill),
           ),
           const SizedBox(height: 16),
           Text(

@@ -126,13 +126,14 @@ class SignInController extends GetxController {
 
       await prefs?.setString(BanXConstants.USER_EMAIL, user.email ?? '');
       await prefs?.setString(BanXConstants.USER_NAME, user.displayName ?? '');
+      await prefs?.setString(BanXConstants.USER_PHOTO, user.photoURL ?? '');
       if (isRememberMe.value) {
         await prefs?.setBool(BanXConstants.REMEMBER_ME, true);
       }
 
+      update();
       hideDialog();
       Get.off(() => const MainNavigator());
-      update();
     } catch (e) {
       hideDialog();
       HelperFunctions.showSnackBar("Error during Google sign-in: ${e.toString()}");

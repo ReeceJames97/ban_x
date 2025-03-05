@@ -4,6 +4,7 @@ import 'package:ban_x/utils/constants/banx_constants.dart';
 import 'package:ban_x/utils/constants/banx_strings.dart';
 import 'package:ban_x/utils/dialog_utils/dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -28,21 +29,29 @@ class MainNavigatorController extends GetxController {
     initialization();
   }
 
-  void initialization() async {
+  initialization() async {
     screenWidth = MediaQuery.of(Get.context!).size.width;
     screenHeight = MediaQuery.of(Get.context!).size.height;
     prefs = await SharedPreferences.getInstance();
+
     if (user != null) {
-      // User is authenticated, you can access their email
       userMail = user!.email ?? "";
       userName = user!.displayName ?? "";
       photoUrl = user!.photoURL ?? "";
-    }
 
-    String uid = FirebaseAuth.instance.currentUser!.uid;
-    prefs?.setString(BanXConstants.USER_ID, uid);
-    UsersModel.userEmail = prefs?.getString(BanXConstants.USER_EMAIL) ?? "";
-    UsersModel.userId = prefs?.getString(BanXConstants.USER_ID) ?? "";
+      await prefs?.setString(BanXConstants.USER_EMAIL, userMail);
+      await prefs?.setString(BanXConstants.USER_NAME, userName);
+      await prefs?.setString(BanXConstants.USER_PHOTO, photoUrl);
+      await prefs?.setString(BanXConstants.USER_ID, user!.uid);
+
+      UsersModel.userEmail = userMail;
+      UsersModel.userId = user!.uid;
+
+      if (kDebugMode) {
+        print("User data updated: $userName, $userMail, $photoUrl");
+      }
+      update();
+    }
   }
 
   ///Confirm Logout
