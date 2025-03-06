@@ -133,16 +133,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     TextButton(
                       onPressed: () async {
                         if (_feedbackController.text.trim().isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Please enter your feedback')),
-                          );
+                          HelperFunctions.showSnackBar(
+                              'Please enter your feedback');
                           return;
                         }
                         
                         if (user == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Please sign in to submit feedback')),
-                          );
+                          HelperFunctions.showSnackBar(
+                              'Please sign in to submit feedback');
                           return;
                         }
 
@@ -156,14 +154,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         try {
                           await _apiServices.submitFeedback(feedback);
                           _feedbackController.clear();
-                          Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Thank you for your feedback!')),
-                          );
+                          Get.back();
+                          HelperFunctions.showSnackBar(
+                              'Thank you for your feedback!');
                         } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Error submitting feedback: $e')),
-                          );
+                          HelperFunctions.showSnackBar(
+                              'Error submitting feedback: $e');
                         }
                       },
                       child: const Text('Submit', style: TextStyle(color: Colors.white)),
